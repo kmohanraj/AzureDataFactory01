@@ -1,0 +1,9 @@
+{
+	"name": "ADFDevTest-06",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "90685df0-5ceb-4f10-83d2-9a0c35eeebe1",
+		"tenantId": "a9f9f428-b5b7-4447-876b-fb2990b82d11"
+	}
+}

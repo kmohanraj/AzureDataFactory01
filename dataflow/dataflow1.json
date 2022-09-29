@@ -1,0 +1,257 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Json1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "Json2",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				},
+				{
+					"dataset": {
+						"referenceName": "Json3",
+						"type": "DatasetReference"
+					},
+					"name": "source3"
+				},
+				{
+					"dataset": {
+						"referenceName": "Json4",
+						"type": "DatasetReference"
+					},
+					"name": "source4"
+				},
+				{
+					"dataset": {
+						"referenceName": "Json5",
+						"type": "DatasetReference"
+					},
+					"name": "source5"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "CosmosDbSqlApiCollection1",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
+				},
+				{
+					"name": "select3"
+				},
+				{
+					"name": "select4"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "join4"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Id as string,",
+				"          IsDeleted as boolean,",
+				"          MasterRecordId as string,",
+				"          Name as string,",
+				"          Phone as string,",
+				"          Rating as string,",
+				"          PersonEmail as string,",
+				"          SAP_Customer_Number__c as string,",
+				"          LastName as string,",
+				"          FirstName as string,",
+				"          Salutation as string,",
+				"          MiddleName as string,",
+				"          Suffix as string,",
+				"          Type as string,",
+				"          RecordTypeId as string,",
+				"          ParentId as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     inferDriftedColumnTypes: true,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> source1",
+				"source(output(",
+				"          Id as string,",
+				"          AccountId as string,",
+				"          OwnerId as string,",
+				"          Name as string,",
+				"          Internal_Comments__c as string,",
+				"          Labor_Rate__c as string,",
+				"          Mileage_Rate__c as string,",
+				"          Travel_Rate__c as string,",
+				"          CurrencyIsoCode as string,",
+				"          RecordTypeId as string,",
+				"          CreatedDate as string,",
+				"          CreatedById as string,",
+				"          LastModifiedDate as string,",
+				"          LastModifiedById as string,",
+				"          SystemModstamp as string,",
+				"          Net_Promoter_Score__c as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> source2",
+				"source(output(",
+				"          Id as string,",
+				"          ServiceResourceId as string,",
+				"          SkillId as string,",
+				"          IsDeleted as boolean,",
+				"          SkillNumber as string,",
+				"          Service_Resource_email__c as string,",
+				"          CurrencyIsoCode as string,",
+				"          CreatedDate as string,",
+				"          CreatedById as string,",
+				"          LastModifiedDate as string,",
+				"          LastModifiedById as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> source3",
+				"source(output(",
+				"          Id as string,",
+				"          IsDeleted as boolean,",
+				"          MemberNumber as string,",
+				"          Street as string,",
+				"          City as string,",
+				"          PostalCode as string,",
+				"          StateCode as string,",
+				"          CountryCode as string,",
+				"          Latitude as string,",
+				"          Longitude as string,",
+				"          CurrencyIsoCode as string,",
+				"          CreatedDate as string,",
+				"          CreatedById as string,",
+				"          LastModifiedDate as string,",
+				"          LastModifiedById as string,",
+				"          SystemModstamp as string,",
+				"          ServiceTerritoryId as string,",
+				"          ServiceResourceId as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> source4",
+				"source(output(",
+				"          Id as string,",
+				"          IsDeleted as boolean,",
+				"          DeveloperName as string,",
+				"          Language as string,",
+				"          MasterLabel as string,",
+				"          CreatedDate as string,",
+				"          CreatedById as string,",
+				"          LastModifiedDate as string,",
+				"          LastModifiedById as string,",
+				"          SystemModstamp as string,",
+				"          LastViewedDate as string,",
+				"          Description as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     documentForm: 'arrayOfDocuments') ~> source5",
+				"source1 select(mapColumn(",
+				"          Id,",
+				"          Name,",
+				"          Phone,",
+				"          Rating,",
+				"          PersonEmail,",
+				"          SAP_Customer_Number__c,",
+				"          ParentId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"source2 select(mapColumn(",
+				"          Id,",
+				"          AccountId,",
+				"          Internal_Comments__c,",
+				"          Labor_Rate__c,",
+				"          Mileage_Rate__c,",
+				"          Travel_Rate__c,",
+				"          Net_Promoter_Score__c",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"source3 select(mapColumn(",
+				"          Id,",
+				"          ServiceResourceId,",
+				"          SkillId,",
+				"          Service_Resource_email__c",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
+				"source4 select(skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"source5 select(mapColumn(",
+				"          Id,",
+				"          DeveloperName,",
+				"          MasterLabel",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select1, join2 join(select1@Id == AccountId,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"select2, join4 join(select2@Id == select3@ServiceResourceId,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"select3, select5 join(SkillId == select5@Id,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join3",
+				"join3, select4 join(select3@Id == select4@ServiceResourceId,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join4",
+				"join1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'document',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}
